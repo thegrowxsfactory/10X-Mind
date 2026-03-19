@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10X Your Mind Protocol</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#F7F3EC;
+  --cream2:#EDE8DF;
+  --cream3:#E4DDD2;
+  --teal:#1D4A47;
+  --teal2:#2A6460;
+  --teal-light:#3D8C86;
+  --teal-dim:rgba(29,74,71,0.07);
+  --teal-mid:rgba(29,74,71,0.15);
+  --sage:#6B8F71;
+  --sage-dim:rgba(107,143,113,0.1);
+  --rust:#B5522A;
+  --rust-dim:rgba(181,82,42,0.08);
+  --text:#1C1C1A;
+  --text-muted:#5A5750;
+  --text-dim:#9A9490;
+  --serif:'Microsoft Sans Serif',sans-serif;
+  --body:'Microsoft Sans Serif',sans-serif;
+  --baskerville:'Microsoft Sans Serif',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:var(--body);
+  overflow-x:hidden;
+}
+
+/* subtle paper texture via repeating gradient */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(29,74,71,0.018) 28px,rgba(29,74,71,0.018) 29px);
+  pointer-events:none;z-index:0;
+}
+
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 32px 120px}
+
+/* ── HERO ── */
+.hero{
+  padding:72px 0 56px;
+  border-bottom:1px solid var(--cream3);
+  position:relative;
+}
+
+.hero-ornament{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:28px;
+}
+.ornament-line{flex:1;height:1px;background:var(--teal-mid)}
+.ornament-center{
+  font-family:var(--serif);font-size:11px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--teal-light);
+  white-space:nowrap;
+}
+
+.hero-h1{
+  font-family:'Microsoft Sans Serif',sans-serif;
+  font-size:clamp(48px,8vw,88px);
+  font-weight:bold;
+  line-height:1.0;
+  letter-spacing:-1px;
+  color:var(--teal);
+  margin-bottom:4px;
+}
+.hero-h1 .italic{color:var(--teal-light)}
+.hero-h1 .light{color:var(--text)}
+
+.hero-rule{
+  width:60px;height:2px;
+  background:var(--teal);
+  margin:24px 0;
+}
+
+.hero-grid{
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:40px;align-items:start;
+}
+.hero-desc{
+  font-family:var(--baskerville);
+  font-size:15px;line-height:1.85;
+  color:var(--text-muted);
+  
+}
+.hero-pillars{
+  display:flex;flex-direction:column;gap:10px;
+}
+.hero-pillar-item{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--body);font-size:12px;
+  color:var(--text-muted);letter-spacing:0.5px;
+}
+.hero-pillar-num{
+  font-family:var(--serif);font-size:18px;
+  color:var(--teal);
+  width:22px;flex-shrink:0;line-height:1;
+}
+
+/* ── NAV ── */
+.mind-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(247,243,236,0.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--cream3);
+  padding:0 32px;margin:0 -32px;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.mind-nav::-webkit-scrollbar{display:none}
+.mnav-btn{
+  font-family:var(--body);font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-dim);padding:15px 16px;
+  border:none;background:none;cursor:pointer;
+  white-space:nowrap;transition:color 0.2s;
+  border-bottom:2px solid transparent;
+  position:relative;top:1px;
+}
+.mnav-btn:hover{color:var(--text-muted)}
+.mnav-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ── SECTIONS ── */
+.pillar{
+  padding:72px 0;
+  border-bottom:1px solid var(--cream3);
+}
+.pillar:last-of-type{border-bottom:none}
+
+.pillar-eyebrow{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;
+}
+.eyebrow-num{
+  font-family:var(--serif);font-size:13px;
+  color:var(--teal-light);
+  letter-spacing:1px;
+}
+.eyebrow-line{flex:1;height:1px;background:var(--teal-mid);max-width:40px}
+.eyebrow-tag{
+  font-size:10px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--text-dim);
+}
+
+.pillar-title{
+  font-family:'Microsoft Sans Serif',sans-serif;
+  font-size:clamp(30px,4.5vw,50px);
+  font-weight:bold;
+  line-height:1.1;
+  color:var(--teal);margin-bottom:10px;
+  letter-spacing:-0.5px;
+}
+.pillar-title em{color:var(--teal-light);font-style:normal}
+
+.pillar-sub{
+  font-family:var(--baskerville);
+  font-size:15px;color:var(--text-muted);
+  line-height:1.7;max-width:540px;margin-bottom:40px;
+}
+
+/* ── AXIOM CARD ── */
+.axiom{
+  border-top:2px solid var(--teal);
+  border-bottom:1px solid var(--cream3);
+  padding:20px 0 20px;margin-bottom:36px;
+  display:flex;gap:16px;align-items:flex-start;
+}
+.axiom-marker{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:24px;font-weight:bold;
+  color:var(--teal-mid);
+  line-height:1;flex-shrink:0;margin-top:4px;
+}
+.axiom-body{}
+.axiom-label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal-light);margin-bottom:6px;
+}
+.axiom-text{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:15px;
+  color:var(--text);line-height:1.65;
+}
+
+/* ── PRINCIPLES ── */
+.principles{display:flex;flex-direction:column;gap:0;margin-bottom:36px}
+.principle{
+  display:grid;grid-template-columns:56px 1fr;
+  gap:0;padding:24px 0;
+  border-bottom:1px solid var(--cream3);
+  transition:background 0.2s;
+}
+.principle:last-child{border-bottom:none}
+.principle:hover .p-num{color:var(--teal)}
+.p-num{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:13px;
+  color:var(--text-dim);
+  padding-top:3px;transition:color 0.2s;
+  letter-spacing:0.5px;
+}
+.p-body{}
+.p-title{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:14px;font-weight:bold;
+  color:var(--text);margin-bottom:7px;letter-spacing:0.2px;
+}
+.p-desc{font-size:13px;color:var(--text-muted);line-height:1.75}
+.p-practice{
+  margin-top:10px;font-size:12px;
+  color:var(--teal2);
+  display:flex;align-items:flex-start;gap:8px;
+  font-family:'Microsoft Sans Serif',sans-serif;
+}
+.p-practice::before{content:'Practice →';color:var(--teal-light);flex-shrink:0;font-style:normal;font-family:'Microsoft Sans Serif',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding-top:2px}
+
+/* ── TWO-UP ── */
+.two-up{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
+
+/* ── PANEL ── */
+.panel{
+  background:var(--cream2);
+  border:1px solid var(--cream3);
+  padding:24px;
+}
+.panel.teal{
+  background:var(--teal-dim);
+  border-color:var(--teal-mid);
+}
+.panel.rust{
+  background:var(--rust-dim);
+  border-color:rgba(181,82,42,0.15);
+}
+.panel.sage{
+  background:var(--sage-dim);
+  border-color:rgba(107,143,113,0.2);
+}
+.panel-label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:10px;
+}
+.panel.teal .panel-label{color:var(--teal-light)}
+.panel.rust .panel-label{color:var(--rust)}
+.panel.sage .panel-label{color:var(--sage)}
+.panel-title{
+  font-family:var(--baskerville);font-size:14px;font-weight:700;
+  margin-bottom:8px;
+}
+.panel-desc{font-size:13px;color:var(--text-muted);line-height:1.7}
+
+/* ── BELIEF MAP ── */
+.belief-map{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;gap:16px;
+  margin-bottom:36px;
+  padding:28px;
+  background:var(--cream2);
+  border:1px solid var(--cream3);
+}
+.belief-col{display:flex;flex-direction:column;gap:10px}
+.belief-col-label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.bc-old .belief-col-label{color:var(--rust)}
+.bc-new .belief-col-label{color:var(--teal-light)}
+.belief-tag{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:12px;
+  line-height:1.5;
+  padding:10px 14px;
+}
+.bc-old .belief-tag{
+  background:var(--rust-dim);
+  border-left:2px solid var(--rust);
+  color:var(--rust);
+}
+.bc-new .belief-tag{
+  background:var(--teal-dim);
+  border-left:2px solid var(--teal);
+  color:var(--teal);
+}
+.belief-arrow{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:22px;font-weight:bold;
+  color:var(--teal-mid);
+  text-align:center;
+}
+
+/* ── DAILY PRACTICE TABLE ── */
+.practice-table{
+  width:100%;border-collapse:collapse;
+  margin-bottom:36px;font-size:13px;
+}
+.practice-table th{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:9px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--text-dim);font-weight:bold;
+  text-align:left;padding:10px 16px 10px 0;
+  border-bottom:2px solid var(--teal);
+}
+.practice-table td{
+  padding:14px 16px 14px 0;
+  border-bottom:1px solid var(--cream3);
+  vertical-align:top;
+  color:var(--text-muted);line-height:1.55;
+}
+.practice-table tr:last-child td{border-bottom:none}
+.practice-table td:first-child{
+  font-family:'Microsoft Sans Serif',sans-serif;font-weight:bold;
+  color:var(--text);font-size:12px;width:130px;
+}
+.practice-table td.time-col{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:11px;
+  color:var(--text-dim);white-space:nowrap;width:80px;
+}
+.practice-table td.impact-col{width:90px}
+.impact-pill{
+  display:inline-block;
+  font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;padding:3px 9px;
+}
+.high{background:var(--teal-dim);color:var(--teal)}
+.med{background:var(--sage-dim);color:var(--sage)}
+.found{background:var(--rust-dim);color:var(--rust)}
+
+/* ── BRAIN STACK ── */
+.brain-stack{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--cream3);
+  margin-bottom:36px;overflow:hidden;
+}
+.brain-layer{
+  display:grid;grid-template-columns:140px 1fr;
+  border-bottom:1px solid var(--cream3);
+  transition:background 0.2s;cursor:default;
+}
+.brain-layer:last-child{border-bottom:none}
+.brain-layer:hover{background:var(--cream2)}
+.bl-label{
+  padding:20px;
+  border-right:1px solid var(--cream3);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.bl-name{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:12px;font-weight:bold;
+  color:var(--text);margin-bottom:3px;
+}
+.bl-sub{font-size:10px;color:var(--text-dim);letter-spacing:0.5px}
+.bl-body{
+  padding:20px;
+}
+.bl-title{font-size:13px;font-weight:bold;color:var(--text);margin-bottom:5px}
+.bl-desc{font-size:12px;color:var(--text-muted);line-height:1.65}
+
+/* ── INTERACTIVE: MENTAL AUDIT ── */
+.audit-zone{
+  border:1px solid var(--cream3);
+  padding:32px;margin-bottom:36px;
+}
+.audit-q{
+  font-family:var(--serif);font-size:20px;
+  color:var(--text);margin-bottom:28px;
+  line-height:1.45;
+}
+.audit-items{display:flex;flex-direction:column;gap:0}
+.audit-item{
+  display:grid;grid-template-columns:1fr 160px;
+  gap:16px;align-items:center;
+  padding:16px 0;border-bottom:1px solid var(--cream3);
+}
+.audit-item:last-child{border-bottom:none}
+.audit-item-label{
+  font-size:13px;color:var(--text-muted);line-height:1.5;
+}
+.audit-item-label strong{color:var(--text);font-weight:500}
+.slider-wrap{display:flex;align-items:center;gap:10px}
+.audit-slider{flex:1;accent-color:var(--teal)}
+.slider-val{
+  font-family:var(--serif);font-size:18px;
+  color:var(--teal);min-width:28px;text-align:right;
+}
+.audit-result{
+  margin-top:24px;padding-top:24px;
+  border-top:1px solid var(--cream3);
+  display:none;
+}
+.audit-result.show{display:block}
+.audit-score-line{
+  display:flex;align-items:baseline;gap:12px;margin-bottom:8px;
+}
+.audit-score-big{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:42px;font-weight:bold;
+  color:var(--teal);line-height:1;
+}
+.audit-score-label{
+  font-family:var(--baskerville);font-size:14px;font-weight:700;
+  color:var(--text);
+}
+.audit-score-desc{
+  font-size:13px;color:var(--text-muted);line-height:1.65;max-width:480px;
+}
+.run-audit-btn{
+  margin-top:20px;
+  background:var(--teal);color:var(--cream);
+  border:none;font-family:var(--body);font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:12px 28px;cursor:pointer;transition:background 0.2s;
+}
+.run-audit-btn:hover{background:var(--teal2)}
+
+/* ── MIND STACK LIST ── */
+.mind-stack{display:flex;flex-direction:column;gap:0;margin-bottom:36px}
+.ms-row{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:20px 0;border-bottom:1px solid var(--cream3);
+}
+.ms-row:last-child{border-bottom:none}
+.ms-num{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:22px;font-weight:bold;
+  color:var(--cream3);line-height:1;flex-shrink:0;
+  width:36px;transition:color 0.2s;
+}
+.ms-row:hover .ms-num{color:var(--teal-mid)}
+.ms-body{}
+.ms-title{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:14px;font-weight:bold;
+  color:var(--text);margin-bottom:6px;
+}
+.ms-desc{font-size:13px;color:var(--text-muted);line-height:1.75}
+.ms-tool{
+  margin-top:9px;font-size:11px;
+  color:var(--teal2);font-family:'Microsoft Sans Serif',sans-serif;
+  letter-spacing:0.5px;display:flex;align-items:center;gap:6px;
+}
+.ms-tool::before{
+  content:'';display:block;width:16px;height:1px;
+  background:var(--teal-light);flex-shrink:0;
+}
+
+/* ── WIDE CALLOUT ── */
+.callout{
+  background:var(--teal);
+  padding:36px 40px;margin-bottom:36px;
+  position:relative;overflow:hidden;
+}
+.callout::before{
+  content:'"';
+  position:absolute;top:-10px;left:24px;
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:100px;
+  color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;
+}
+.callout-label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(247,243,236,0.5);margin-bottom:10px;
+}
+.callout-text{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:17px;
+  color:var(--cream);line-height:1.6;
+  max-width:600px;position:relative;z-index:1;
+}
+
+/* ── RITUAL TIMELINE ── */
+.ritual-timeline{display:flex;flex-direction:column;gap:0;margin-bottom:36px;position:relative}
+.ritual-timeline::before{
+  content:'';position:absolute;left:19px;top:8px;bottom:8px;
+  width:1px;background:var(--cream3);z-index:0;
+}
+.ritual-step{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:16px 0;position:relative;
+}
+.ritual-dot{
+  width:40px;height:40px;flex-shrink:0;
+  border-radius:50%;border:1px solid var(--cream3);
+  background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:11px;font-weight:bold;
+  color:var(--teal);z-index:1;position:relative;
+  transition:all 0.2s;
+}
+.ritual-step.done .ritual-dot{
+  background:var(--teal);color:var(--cream);border-color:var(--teal);
+}
+.ritual-body{padding-top:8px}
+.ritual-title{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:14px;font-weight:bold;
+  color:var(--text);margin-bottom:4px;
+}
+.ritual-desc{font-size:12px;color:var(--text-muted);line-height:1.65}
+.ritual-time{
+  font-size:10px;color:var(--text-dim);letter-spacing:1px;
+  text-transform:uppercase;margin-top:4px;
+}
+.ritual-step{cursor:pointer}
+.ritual-step:hover .ritual-dot{border-color:var(--teal)}
+
+/* ── CLOSING ── */
+.closing{
+  padding:56px 0 0;
+  border-top:1px solid var(--cream3);
+  margin-top:40px;
+  text-align:center;
+}
+.closing-ornament{
+  display:flex;align-items:center;gap:16px;margin-bottom:28px;
+}
+.closing-ornament-line{flex:1;height:1px;background:var(--cream3)}
+.closing-h{
+  font-family:'Microsoft Sans Serif',sans-serif;font-size:clamp(24px,4vw,40px);
+  font-weight:bold;
+  color:var(--teal);line-height:1.2;margin-bottom:16px;
+}
+.closing-sub{
+  font-family:'Microsoft Sans Serif',sans-serif;
+  font-size:14px;color:var(--text-muted);line-height:1.7;
+  max-width:440px;margin:0 auto 28px;
+}
+.closing-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.c-btn{
+  background:var(--teal);color:var(--cream);
+  border:none;font-family:var(--body);font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:13px 24px;cursor:pointer;transition:background 0.2s;
+}
+.c-btn:hover{background:var(--teal2)}
+.c-btn.outline{
+  background:transparent;color:var(--teal);
+  border:1px solid var(--teal);
+}
+.c-btn.outline:hover{background:var(--teal-dim)}
+
+/* ── SCROLL ANIM ── */
+.fade-up{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
+.fade-up.in{opacity:1;transform:translateY(0)}
+
+/* ── IMAGES ── */
+.section-img{
+  width:100%;margin-bottom:36px;overflow:hidden;
+  position:relative;
+}
+.section-img img{
+  width:100%;height:320px;object-fit:cover;
+  display:block;
+  filter:saturate(0.75) brightness(0.92);
+  transition:filter 0.4s;
+}
+.section-img:hover img{filter:saturate(0.9) brightness(0.97)}
+.section-img .img-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 16px;
+  background:rgba(29,74,71,0.65);
+  font-family:'Microsoft Sans Serif',sans-serif;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(247,243,236,0.85);
+}
+.hero-img{
+  width:100%;margin:28px 0 0;overflow:hidden;
+}
+.hero-img img{
+  width:100%;height:260px;object-fit:cover;
+  display:block;
+  filter:saturate(0.7) brightness(0.88);
+}
+.two-img{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:36px;
+}
+.two-img img{
+  width:100%;height:200px;object-fit:cover;display:block;
+  filter:saturate(0.7) brightness(0.9);
+  transition:filter 0.3s;
+}
+.two-img img:hover{filter:saturate(0.88) brightness(0.96)}
+
+@media(max-width:600px){
+  .two-img{grid-template-columns:1fr}
+  .section-img img,.hero-img img{height:200px}
+}
+
+@media(min-width:601px){
+  .wrap{padding:0 32px 120px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ── HERO ── -->
+<section class="hero fade-up">
+  <div class="hero-ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-center">10X Transformation System</div>
+    <div class="ornament-line"></div>
+  </div>
+
+  <h1 class="hero-h1">
+    10X<br>
+    <em class="italic">Your</em><br>
+    <span class="light">Mind</span>
+  </h1>
+  <div class="hero-rule"></div>
+
+  <div class="hero-grid">
+    <p class="hero-desc">The mind is not a fixed instrument. It is a living system — trainable, expandable, and capable of operating at orders of magnitude beyond its current default. This protocol is the operating manual for unlocking that capacity.</p>
+    <div class="hero-pillars">
+      <div class="hero-pillar-item"><span class="hero-pillar-num">i.</span>Mental Architecture</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">ii.</span>Belief Reconstruction</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">iii.</span>Focus &amp; Cognition</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">iv.</span>Emotional Mastery</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">v.</span>Accelerated Learning</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">vi.</span>Identity Engineering</div>
+      <div class="hero-pillar-item"><span class="hero-pillar-num">vii.</span>Daily Mind Rituals</div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ocean sunrise horizon" loading="lazy">
+  </div>
+</section>
+
+<!-- ── NAV ── -->
+<nav class="mind-nav" id="mind-nav">
+  <button class="mnav-btn active" onclick="goTo('s1')">i · Architecture</button>
+  <button class="mnav-btn" onclick="goTo('s2')">ii · Beliefs</button>
+  <button class="mnav-btn" onclick="goTo('s3')">iii · Focus</button>
+  <button class="mnav-btn" onclick="goTo('s4')">iv · Emotion</button>
+  <button class="mnav-btn" onclick="goTo('s5')">v · Learning</button>
+  <button class="mnav-btn" onclick="goTo('s6')">vi · Identity</button>
+  <button class="mnav-btn" onclick="goTo('s7')">vii · Rituals</button>
+</nav>
+
+<!-- ═══ I · MENTAL ARCHITECTURE ═══ -->
+<section class="pillar fade-up" id="s1">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">i.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Foundation</span>
+  </div>
+  <h2 class="pillar-title">Mental <em>Architecture</em></h2>
+  <p class="pillar-sub">Before you can expand the mind, you must understand how it is currently built — the invisible structures that determine what you can think, feel, and become.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">First axiom</div>
+      <div class="axiom-text">Your mind is not the thoughts you have. It is the structure that determines which thoughts are even possible for you. Change the structure, and the thoughts change automatically.</div>
+    </div>
+  </div>
+
+  <div class="brain-stack">
+    <div class="brain-layer">
+      <div class="bl-label">
+        <div class="bl-name">Surface Layer</div>
+        <div class="bl-sub">Conscious thoughts</div>
+      </div>
+      <div class="bl-body">
+        <div class="bl-title">What you notice</div>
+        <div class="bl-desc">The running commentary, the to-do lists, the daily inner monologue. This layer is highly visible but has the least power. It is downstream of everything below it. Most personal development works only here — which is why it rarely produces lasting change.</div>
+      </div>
+    </div>
+    <div class="brain-layer">
+      <div class="bl-label">
+        <div class="bl-name">Belief Layer</div>
+        <div class="bl-sub">Core assumptions</div>
+      </div>
+      <div class="bl-body">
+        <div class="bl-title">What you assume without knowing you assume it</div>
+        <div class="bl-desc">The filter through which all experience is interpreted. Beliefs are invisible precisely because they feel like reality, not opinions. "I'm not creative," "success is hard," "I'm an introvert" — these are beliefs operating as facts. This is the primary 10X leverage point.</div>
+      </div>
+    </div>
+    <div class="brain-layer">
+      <div class="bl-label">
+        <div class="bl-name">Identity Layer</div>
+        <div class="bl-sub">Self-concept</div>
+      </div>
+      <div class="bl-body">
+        <div class="bl-title">Who you are (or believe you are)</div>
+        <div class="bl-desc">The deepest operating system. Identity determines which beliefs feel available to you. "People like me don't do that" is identity running as architecture. When identity expands, belief capacity expands with it. This is the ultimate 10X target.</div>
+      </div>
+    </div>
+    <div class="brain-layer">
+      <div class="bl-label">
+        <div class="bl-name">Somatic Layer</div>
+        <div class="bl-sub">Body-mind</div>
+      </div>
+      <div class="bl-body">
+        <div class="bl-title">What lives in the body, not just the head</div>
+        <div class="bl-desc">The nervous system holds memory, pattern, and capacity. A dysregulated nervous system produces dysregulated thinking regardless of mindset work. Somatic intelligence — breathing, posture, movement, recovery — is the biological foundation of mental performance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <div class="p-title">The interpretation gap</div>
+        <div class="p-desc">Between every event and your response lies a gap. In that gap lives your interpretation — shaped entirely by your mental architecture. Two people experience the same setback: one is crushed, one is energized. The event is identical. The architecture is different. 10X mind work is about expanding and redesigning that gap.</div>
+        <div class="p-practice">Catch yourself reacting. Ask: what interpretation am I running right now? Is it serving me?</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <div class="p-title">The confirmation machine</div>
+        <div class="p-desc">Your Reticular Activating System (RAS) filters 11 million bits of information per second down to approximately 50 bits you consciously experience. It filters based on what it has been told is important — by your beliefs and identity. You are not seeing reality. You are seeing a belief-filtered version of it. This is the most important fact in mental performance.</div>
+        <div class="p-practice">Each morning, tell your RAS what to look for: "Today I will notice evidence of opportunity, progress, and possibility."</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-body">
+        <div class="p-title">Neuroplasticity is not metaphor</div>
+        <div class="p-desc">The brain physically rewires based on what you think, experience, and repeat. Every thought pathway you strengthen becomes easier to access. Every one you stop using weakens. You are not stuck with the mind you have — you are constructing it, continuously, whether intentionally or by default.</div>
+        <div class="p-practice">Identify one mental habit you want to strengthen. Give it a name. Deliberately activate it 3 times daily.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ II · BELIEF RECONSTRUCTION ═══ -->
+<div class="section-img fade-up">
+  <img src="https://images.pexels.com/photos/733852/pexels-photo-733852.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Person journaling in morning light" loading="lazy">
+  <div class="img-caption">Pillar ii · Belief Reconstruction</div>
+</div>
+<section class="pillar fade-up" id="s2">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">ii.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Core Work</span>
+  </div>
+  <h2 class="pillar-title">Belief <em>Reconstruction</em></h2>
+  <p class="pillar-sub">A limiting belief is not a character flaw. It is a hypothesis — formed from past evidence — that you have been treating as permanent truth. It can be revised. Deliberately. Systematically.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Second axiom</div>
+      <div class="axiom-text">Every belief was installed at a specific moment, by a specific experience or person. It is not yours by nature — it was learned. And what was learned can be unlearned and replaced with something that serves your 10X life.</div>
+    </div>
+  </div>
+
+  <div class="belief-map">
+    <div class="belief-col bc-old">
+      <div class="belief-col-label">Limiting beliefs — to dissolve</div>
+      <div class="belief-tag">"I'm not naturally confident"</div>
+      <div class="belief-tag">"Success requires sacrifice of everything else"</div>
+      <div class="belief-tag">"I always self-sabotage when things go well"</div>
+      <div class="belief-tag">"I need to earn the right to want more"</div>
+      <div class="belief-tag">"People like me don't reach that level"</div>
+    </div>
+    <div class="belief-arrow">&#8594;</div>
+    <div class="belief-col bc-new">
+      <div class="belief-col-label">Expansive beliefs — to install</div>
+      <div class="belief-tag">"Confidence is a skill I am actively building"</div>
+      <div class="belief-tag">"Expansion in one area fuels expansion in all areas"</div>
+      <div class="belief-tag">"I am learning to hold success with ease"</div>
+      <div class="belief-tag">"I am allowed to want and to have"</div>
+      <div class="belief-tag">"I am the kind of person who does exactly this"</div>
+    </div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <div class="p-title">The ABCDE belief audit</div>
+        <div class="p-desc">Activating event → Belief triggered → Consequence (what you feel/do) → Disputation (challenge the belief) → new Effect (alternative interpretation). This is the most battle-tested belief change framework in cognitive science. It works by treating beliefs as arguments — not facts — that can be challenged with counter-evidence.</div>
+        <div class="p-practice">Run one limiting belief through the full ABCDE sequence in writing this week.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <div class="p-title">Evidence architecture</div>
+        <div class="p-desc">Beliefs are sustained by evidence. To change a belief, you don't need to talk yourself out of it — you need to build a competing evidence stack. Find 10 pieces of real evidence that the new belief is true. Write them down. Read them daily. Your RAS will begin finding more. This is belief change through data, not willpower.</div>
+        <div class="p-practice">Pick one new belief. Find 10 pieces of real evidence it is already true. Add one new piece each week.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-body">
+        <div class="p-title">The origin question</div>
+        <div class="p-desc">For every limiting belief, ask: "Where did I learn this? Who taught it to me? Was that source reliable? Did they have my 10X best interest in mind?" Almost always, limiting beliefs were installed by people who were themselves limited — operating from fear, their own wounds, or simple ignorance. You are not required to inherit their ceiling.</div>
+        <div class="p-practice">Name the person or moment that installed your most powerful limiting belief. Thank it for its service. Release it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-up">
+    <div class="panel teal">
+      <div class="panel-label">Belief installation methods</div>
+      <div class="panel-title">How new beliefs take root</div>
+      <div class="panel-desc">Repetition (spaced, daily affirmation of the new belief). Emotional charge (pair the belief with a strong positive feeling). Embodiment (act as if it's true before it fully is). Evidence stacking (collect real proof). Environmental immersion (spend time with people who already hold it).</div>
+    </div>
+    <div class="panel rust">
+      <div class="panel-label">Belief resistance — warning signs</div>
+      <div class="panel-title">When the old belief fights back</div>
+      <div class="panel-desc">Resistance is a signal the work is real, not a sign to stop. Common forms: sudden cynicism about the new belief, unexpected self-sabotage, "exceptions" that seem to disprove it, urge to abandon the practice. These are the old architecture defending itself. Stay in the chair.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ III · FOCUS & COGNITION ═══ -->
+<section class="pillar fade-up" id="s3">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">iii.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Multiplier</span>
+  </div>
+  <h2 class="pillar-title">Focus &amp; <em>Cognition</em></h2>
+  <p class="pillar-sub">Focus is not a personality trait. It is a trainable biological state — one that most people have never deliberately developed. A 10X mind operates at a level of cognitive clarity that the distracted mind literally cannot access.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Third axiom</div>
+      <div class="axiom-text">A focused mind operating on the right problem for two hours will outproduce a distracted mind working for twelve. The quality of your focus determines the quality of your cognition. Everything else follows from this.</div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MENTAL AUDIT -->
+  <div class="audit-zone">
+    <div class="audit-q">How strong is your mind's operating system right now? Rate each dimension honestly:</div>
+    <div class="audit-items" id="audit-items">
+      <div class="audit-item">
+        <div class="audit-item-label"><strong>Sustained attention</strong> — your ability to hold focus on one thing for 30+ minutes without mental drift</div>
+        <div class="slider-wrap"><input type="range" class="audit-slider" min="1" max="10" value="5" oninput="updateAudit(this)"><span class="slider-val">5</span></div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item-label"><strong>Mental clarity</strong> — how clear, sharp, and lucid your thinking feels on a typical day</div>
+        <div class="slider-wrap"><input type="range" class="audit-slider" min="1" max="10" value="5" oninput="updateAudit(this)"><span class="slider-val">5</span></div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item-label"><strong>Cognitive endurance</strong> — your ability to think at high quality for a full day without significant decline</div>
+        <div class="slider-wrap"><input type="range" class="audit-slider" min="1" max="10" value="5" oninput="updateAudit(this)"><span class="slider-val">5</span></div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item-label"><strong>Distraction resistance</strong> — how well you maintain focus in the presence of notifications, noise, or interruptions</div>
+        <div class="slider-wrap"><input type="range" class="audit-slider" min="1" max="10" value="5" oninput="updateAudit(this)"><span class="slider-val">5</span></div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item-label"><strong>Creative insight</strong> — frequency of original ideas, novel connections, and breakthrough thinking</div>
+        <div class="slider-wrap"><input type="range" class="audit-slider" min="1" max="10" value="5" oninput="updateAudit(this)"><span class="slider-val">5</span></div>
+      </div>
+    </div>
+    <button class="run-audit-btn" onclick="runAudit()">Run my cognitive audit</button>
+    <div class="audit-result" id="audit-result">
+      <div class="audit-score-line">
+        <div class="audit-score-big" id="audit-score">50</div>
+        <div class="audit-score-label" id="audit-label">—</div>
+      </div>
+      <div class="audit-score-desc" id="audit-desc"></div>
+    </div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <div class="p-title">The focus-recovery cycle</div>
+        <div class="p-desc">The brain operates in ultradian rhythms of approximately 90–120 minutes of high focus followed by a mandatory recovery trough. Fighting this cycle doesn't produce more work — it produces worse work at higher physiological cost. Working with it means taking real 15–20 minute recovery breaks between blocks. Not coffee, not email — actual neural rest.</div>
+        <div class="p-practice">Structure your day in 90-min focus blocks with 20-min true recovery between them. No exceptions for 30 days.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <div class="p-title">The attention training protocol</div>
+        <div class="p-desc">Focus is a muscle trained by the same mechanism as any other: progressive overload and recovery. Start with 20-minute single-task sessions. Notice when attention drifts. Return it — without self-criticism. That returning is the rep. After 2 weeks, extend to 35 minutes. After 4 weeks, 50. After 8 weeks, 90-minute uninterrupted focus is sustainable.</div>
+        <div class="p-practice">Begin a daily 20-minute attention training session — one task, no switching, no devices. Treat each return to focus as a success.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-body">
+        <div class="p-title">The pre-cognition ritual</div>
+        <div class="p-desc">The first 10 minutes before high-cognitive work determine the quality of the next 90. A pre-cognition ritual primes the prefrontal cortex and suppresses the default mode network. It can be as simple as 3 minutes of slow breathing, followed by a single written sentence stating your intention. The ritual is the signal: this time is different from all other time.</div>
+        <div class="p-practice">Design a 5-minute pre-cognition ritual. Use it before every important thinking session. Let it become a Pavlovian focus trigger.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">04</div>
+      <div class="p-body">
+        <div class="p-title">Cognitive nutrition</div>
+        <div class="p-desc">The brain is 2% of body mass and 20% of caloric consumption. What you eat, when you eat, and how you hydrate has a direct and measurable effect on cognitive performance. Dehydration of just 1–2% impairs attention, working memory, and decision quality. The 10X mind is fueled as a precision instrument — not as an afterthought.</div>
+        <div class="p-practice">Drink 500ml of water before any high-cognitive session. Note the difference in mental clarity within 20 minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IV · EMOTIONAL MASTERY ═══ -->
+<div class="section-img fade-up">
+  <img src="https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Person walking forest path in morning light" loading="lazy">
+  <div class="img-caption">Pillar iv · Emotional Mastery</div>
+</div>
+<section class="pillar fade-up" id="s4">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">iv.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Stabilizer</span>
+  </div>
+  <h2 class="pillar-title">Emotional <em>Mastery</em></h2>
+  <p class="pillar-sub">Emotions are not obstacles to performance. They are information. A 10X mind does not suppress, manage, or override emotion — it reads it accurately and channels it with precision.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Fourth axiom</div>
+      <div class="axiom-text">Every emotion is a signal carrying data about what matters, what's threatened, and what needs attention. The person who can read that signal clearly — without being hijacked by it — has a permanent cognitive advantage over everyone who cannot.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">The critical distinction</div>
+    <div class="callout-text">Emotional intelligence is not about feeling less. It is about feeling accurately, quickly, and with enough distance to choose your response rather than simply enacting your reaction.</div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <div class="p-title">The 90-second rule</div>
+        <div class="p-desc">Neuroscientist Jill Bolte Taylor discovered that the physiological component of an emotion — the hormonal and neurological surge — lasts approximately 90 seconds. If an emotion persists beyond that, it is being actively re-triggered by your thoughts. You are choosing to extend it, usually without knowing it. Knowing this changes everything about emotional management.</div>
+        <div class="p-practice">Next time a difficult emotion arises, set a 90-second timer. Allow the feeling fully. After 90 seconds, consciously choose whether to continue or release it.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <div class="p-title">Emotional granularity</div>
+        <div class="p-desc">Research shows that people with a richer emotional vocabulary — the ability to distinguish not just "angry" from "sad" but "frustrated" from "contemptuous" from "humiliated" — are significantly better at emotional regulation. This is because labeling an emotion with precision activates the prefrontal cortex and reduces amygdala reactivity. Name it to tame it is neuroscience, not metaphor.</div>
+        <div class="p-practice">Expand your emotional vocabulary. Learn 10 new emotion words. Use them to precisely name what you feel, each day.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-body">
+        <div class="p-title">State design</div>
+        <div class="p-desc">You can deliberately design and enter resourceful emotional states — curiosity, determination, creative flow, confident calm — through specific physical interventions. Breathing pattern changes your nervous system state in under 60 seconds. Body posture directly affects hormone levels. Deliberate facial expressions activate corresponding emotional circuits. This is not "fake it till you make it" — it is applied neuroscience.</div>
+        <div class="p-practice">Design a personal "peak state" entry sequence: specific breath pattern, posture adjustment, and internal phrase. Use it before every important conversation or challenge.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-up">
+    <div class="panel sage">
+      <div class="panel-label">Emotions as data — what they signal</div>
+      <div class="panel-title">Reading your emotional intelligence</div>
+      <div class="panel-desc">Anxiety → something important is at risk. Anger → a boundary or value is violated. Sadness → something meaningful has been lost. Envy → a desire you haven't claimed. Guilt → a value has been compromised. Fear → an anticipated threat (often imagined). Every emotion is pointing at something. Learn its language.</div>
+    </div>
+    <div class="panel teal">
+      <div class="panel-label">The regulation toolkit</div>
+      <div class="panel-title">Five proven state-change tools</div>
+      <div class="panel-desc">Physiological sigh (double inhale through nose, long exhale through mouth) — 60 seconds. Cold water on face — activates dive reflex, instant calm. Box breathing: 4 in, 4 hold, 4 out, 4 hold. Labeling the emotion aloud. Brief physical movement — 90 seconds changes cortisol levels measurably.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V · ACCELERATED LEARNING ═══ -->
+<section class="pillar fade-up" id="s5">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">v.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Engine</span>
+  </div>
+  <h2 class="pillar-title">Accelerated <em>Learning</em></h2>
+  <p class="pillar-sub">The ability to learn faster than your peers is the most durable competitive advantage available. It compounds indefinitely. Most people learn accidentally. A 10X mind learns by design.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Fifth axiom</div>
+      <div class="axiom-text">The speed of your learning determines the speed of your evolution. In a world that changes faster than any curriculum, the person who learns fastest wins — not permanently, but perpetually.</div>
+    </div>
+  </div>
+
+  <table class="practice-table">
+    <thead>
+      <tr>
+        <th>Learning method</th>
+        <th>How to apply it</th>
+        <th class="time-col">Time needed</th>
+        <th class="impact-col">Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>The Feynman Technique</td>
+        <td>Explain the concept in simple language as if teaching a child. Where you struggle to explain, that's where your understanding breaks down. Go back to the source and close the gap.</td>
+        <td class="time-col">20–40 min/concept</td>
+        <td class="impact-col"><span class="impact-pill high">High</span></td>
+      </tr>
+      <tr>
+        <td>Spaced repetition</td>
+        <td>Review material at increasing intervals: 1 day, 3 days, 7 days, 14 days, 30 days. Each review strengthens the neural pathway. Cramming produces short-term retention. Spacing produces permanent encoding.</td>
+        <td class="time-col">10 min/day</td>
+        <td class="impact-col"><span class="impact-pill high">High</span></td>
+      </tr>
+      <tr>
+        <td>Active recall</td>
+        <td>Instead of re-reading notes, close them and try to recall everything you know. The effort of retrieval — even failed retrieval — strengthens memory far more than passive review. Test yourself before you feel ready.</td>
+        <td class="time-col">15 min/session</td>
+        <td class="impact-col"><span class="impact-pill high">High</span></td>
+      </tr>
+      <tr>
+        <td>Interleaving</td>
+        <td>Mix different but related topics within a single learning session rather than mastering one before moving to the next. It feels harder — and it is. That difficulty is the encoding. Blocked practice feels easier; interleaved practice produces better long-term retention.</td>
+        <td class="time-col">Restructure sessions</td>
+        <td class="impact-col"><span class="impact-pill med">Medium</span></td>
+      </tr>
+      <tr>
+        <td>The 20-hour rule</td>
+        <td>For most practical skills, 20 deliberate practice hours will take you from zero to functional competence. The key is deliberate: focused, feedback-rich, working at the edge of your ability. 20 casual hours produces almost nothing. 20 deliberate hours produces real skill.</td>
+        <td class="time-col">20 hrs total</td>
+        <td class="impact-col"><span class="impact-pill found">Foundation</span></td>
+      </tr>
+      <tr>
+        <td>Sleep-based consolidation</td>
+        <td>Learning happens during sleep, not just during study. The hippocampus replays the day's learning and consolidates it into long-term memory during slow-wave sleep. Studying just before sleep maximizes this effect. Skipping sleep after learning wastes 40–50% of what was absorbed.</td>
+        <td class="time-col">Sleep 7–8 hrs</td>
+        <td class="impact-col"><span class="impact-pill high">High</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body">
+        <div class="p-title">The 1% daily compound</div>
+        <div class="p-desc">Improving 1% per day in any skill produces a 37× improvement over one year. This is not motivation — it is compound mathematics. The implication: the size of each day's learning matters less than the consistency and deliberateness of it. Tiny, daily, intentional learning compounds into mastery that appears sudden to everyone watching from outside.</div>
+        <div class="p-practice">Name one skill you will improve by 1% per day for the next 90 days. Define what 1% looks like in concrete practice.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body">
+        <div class="p-title">The transfer principle</div>
+        <div class="p-desc">The most powerful learning is learning that transfers — knowledge from one domain that illuminates another. The person who studies neuroscience becomes a better coach. The person who studies systems theory becomes a better entrepreneur. Deliberately read across domains. The unusual connections are where insight lives.</div>
+        <div class="p-practice">Every month, read one book in a field completely outside your normal domain. Look for the principles that transfer to your work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VI · IDENTITY ENGINEERING ═══ -->
+<div class="section-img fade-up">
+  <img src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Calm lake reflection in nature" loading="lazy">
+  <div class="img-caption">Pillar vi · Identity Engineering</div>
+</div>
+<section class="pillar fade-up" id="s6">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">vi.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Operating System</span>
+  </div>
+  <h2 class="pillar-title">Identity <em>Engineering</em></h2>
+  <p class="pillar-sub">Identity is the deepest layer of the mind — and the highest leverage point. Change what you believe you are, and everything that flows from that belief changes automatically, without effort.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Sixth axiom</div>
+      <div class="axiom-text">You do not rise to the level of your goals. You fall to the level of your identity. Every goal that exceeds your current self-concept will be unconsciously sabotaged. The work is not to chase the goal — it is to become the person for whom the goal is natural.</div>
+    </div>
+  </div>
+
+  <div class="mind-stack">
+    <div class="ms-row">
+      <div class="ms-num">1</div>
+      <div class="ms-body">
+        <div class="ms-title">Audit your current identity statements</div>
+        <div class="ms-desc">List every sentence you say or think that begins with "I am," "I'm not," "I always," "I never," "I can't," "I'm the kind of person who." These are your identity declarations. Each one is actively shaping your behavior and filtering your perception of what's possible for you.</div>
+        <div class="ms-tool">Write 20 identity statements you currently hold. Evaluate each: does this serve your 10X life?</div>
+      </div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-num">2</div>
+      <div class="ms-body">
+        <div class="ms-title">Design your 10X identity</div>
+        <div class="ms-desc">Write a paragraph describing who you are when you are fully expressed — when the 10X version of you is the default. Write it in present tense. Include how you think, how you relate, what you expect, how you respond to setbacks, and what you take for granted about your own capability.</div>
+        <div class="ms-tool">Write your 10X identity paragraph. Read it aloud daily for 30 days.</div>
+      </div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-num">3</div>
+      <div class="ms-body">
+        <div class="ms-title">Act from the new identity before you feel it</div>
+        <div class="ms-desc">The nervous system learns through action, not intention. Waiting to feel like your 10X self before acting like them is backwards. Act as if — in specific, small behaviors — and the feeling follows. One conversation, one decision, one ask made from your 10X identity reinforces the new neural pathway more than a month of visualization.</div>
+        <div class="ms-tool">Identify one behavior your 10X self does naturally. Do it once today — before you feel fully ready.</div>
+      </div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-num">4</div>
+      <div class="ms-body">
+        <div class="ms-title">Environment as identity reinforcement</div>
+        <div class="ms-desc">You are constantly absorbing identity signals from your environment — the people around you, the content you consume, the conversations you participate in, the spaces you inhabit. Surround yourself with people who already hold the identity you are building. Their beliefs about what's normal will become your reference point.</div>
+        <div class="ms-tool">Audit your 5 most frequent relationships. Do they expand or contract your 10X identity?</div>
+      </div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-num">5</div>
+      <div class="ms-body">
+        <div class="ms-title">The identity integration timeline</div>
+        <div class="ms-desc">Genuine identity shift — not just behavior change, but a new felt sense of self — typically requires 6–18 months of consistent action, evidence collection, and deliberate reinforcement. Do not mistake the absence of immediate felt change for evidence that the work isn't working. The roots grow before the tree is visible.</div>
+        <div class="ms-tool">Commit to a 12-month identity integration practice. Track one evidence point per week.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VII · DAILY MIND RITUALS ═══ -->
+<div class="section-img fade-up">
+  <img src="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mountain sunrise landscape" loading="lazy">
+  <div class="img-caption">Pillar vii · Daily Mind Rituals</div>
+</div>
+<section class="pillar fade-up" id="s7">
+  <div class="pillar-eyebrow">
+    <span class="eyebrow-num">vii.</span>
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-tag">The Daily Practice</span>
+  </div>
+  <h2 class="pillar-title">Daily Mind <em>Rituals</em></h2>
+  <p class="pillar-sub">A 10X mind is not built in insights. It is built in daily practices — small, consistent, compounding acts of deliberate mental cultivation. Click each ritual to mark it done.</p>
+
+  <div class="axiom">
+    <div class="axiom-marker">&ldquo;</div>
+    <div class="axiom-body">
+      <div class="axiom-label">Seventh axiom</div>
+      <div class="axiom-text">What you do every day matters infinitely more than what you do occasionally. The 10X mind is not the result of one retreat, one book, or one breakthrough. It is the cumulative effect of ten thousand small, deliberate choices to tend the mind.</div>
+    </div>
+  </div>
+
+  <div class="ritual-timeline" id="ritual-timeline">
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">am</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Morning mind primer (before phone)</div>
+        <div class="ritual-desc">5 minutes: 3 slow breaths to activate the prefrontal cortex. Write today's single most important intention. Read your 10X identity paragraph aloud. Ask: "What would the 10X version of me do today that the current version avoids?"</div>
+        <div class="ritual-time">5 min · on waking · before any input</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">01</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Belief evidence journal</div>
+        <div class="ritual-desc">Write one piece of evidence — no matter how small — that supports your primary new belief. Look for it deliberately. Log it with specificity: what happened, when, and what it means about who you are becoming.</div>
+        <div class="ritual-time">5 min · morning · with coffee or tea</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">02</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Deliberate attention training</div>
+        <div class="ritual-desc">20–90 minutes of focused single-task work — the most important cognitive work of the day, done first. No notifications, no context switching. Each session is simultaneously productive work and attention muscle training.</div>
+        <div class="ritual-time">20–90 min · morning · first deep work block</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">03</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Midday mental reset</div>
+        <div class="ritual-desc">A deliberate 10-minute pause between the morning's cognitive demands and the afternoon's. Walk outside. No input. Let the default mode network do its work — this is when the subconscious integrates the morning's thinking and surfaces insights. Do not skip this. It is not a break from work; it is part of the work.</div>
+        <div class="ritual-time">10 min · midday · no screens</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">04</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Emotional check-in</div>
+        <div class="ritual-desc">Once in the afternoon: name precisely what you are feeling (using specific emotional vocabulary). Ask what the emotion is pointing at. If it is pointing at something real, act on it. If it is a residue of something old or imagined, release it with the 90-second practice.</div>
+        <div class="ritual-time">3 min · afternoon · before communication window</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">05</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Learning integration</div>
+        <div class="ritual-desc">Spend 20 minutes each day in deliberate learning — reading, a course, a concept. Immediately after, practice active recall: close the source and write everything you remember. Then apply one thing you learned to a real situation within 24 hours. Learning that is not applied within 24 hours loses 70% of its retention.</div>
+        <div class="ritual-time">20 min · afternoon or evening</div>
+      </div>
+    </div>
+    <div class="ritual-step" onclick="toggleRitual(this)">
+      <div class="ritual-dot">pm</div>
+      <div class="ritual-body">
+        <div class="ritual-title">Evening mind close</div>
+        <div class="ritual-desc">10 minutes before sleep: write tomorrow's single most important cognitive task so the subconscious works overnight. Log one identity evidence point from today. Write one thing the day taught you about who you are becoming. No screens in the final 30 minutes — the last input before sleep is processed disproportionately by the sleeping brain.</div>
+        <div class="ritual-time">10 min · before sleep · no screens after</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ritual-score" style="font-family:'Microsoft Sans Serif',sans-serif;font-size:14px;color:var(--teal);margin-bottom:36px;min-height:24px;"></div>
+
+  <div class="two-img fade-up">
+    <img src="https://images.pexels.com/photos/1051449/pexels-photo-1051449.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Morning writing ritual with coffee" loading="lazy">
+    <img src="https://images.pexels.com/photos/1028741/pexels-photo-1028741.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Peaceful sunrise reflection" loading="lazy">
+  </div>
+
+</section>
+
+<!-- ── CLOSING ── -->
+<div class="closing fade-up">
+  <div class="closing-ornament">
+    <div class="closing-ornament-line"></div>
+    <div style="font-family:'Microsoft Sans Serif',sans-serif;font-size:20px;color:var(--teal-mid);padding:0 16px">✦</div>
+    <div class="closing-ornament-line"></div>
+  </div>
+  <h2 class="closing-h">The mind you want<br>is the mind you build.</h2>
+  <p class="closing-sub">Not through force, not through discipline alone — but through daily, deliberate, loving tending of the most remarkable instrument you will ever possess.</p>
+  <div class="closing-btns">
+    <button class="c-btn" onclick="window.print()">Print protocol</button>
+    <button class="c-btn outline" onclick="copyLink()">Share this protocol</button>
+    <button class="c-btn outline" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Return to top</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ── FADE-IN OBSERVER ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:0.06});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// ── NAV ACTIVE ──
+const sids=['s1','s2','s3','s4','s5','s6','s7'];
+const nbtns=document.querySelectorAll('.mnav-btn');
+const so=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const i=sids.indexOf(e.target.id);
+      if(i!==-1)nbtns.forEach((b,j)=>b.classList.toggle('active',i===j));
+    }
+  });
+},{threshold:0.25});
+sids.forEach(id=>{const el=document.getElementById(id);if(el)so.observe(el)});
+
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el){const y=el.getBoundingClientRect().top+window.scrollY-48;window.scrollTo({top:y,behavior:'smooth'});}
+}
+
+// ── COGNITIVE AUDIT ──
+function updateAudit(input){
+  input.nextElementSibling.textContent=input.value;
+}
+function runAudit(){
+  const sliders=document.querySelectorAll('.audit-slider');
+  let total=0;
+  sliders.forEach(s=>total+=parseInt(s.value));
+  const max=sliders.length*10;
+  const pct=Math.round((total/max)*100);
+  const r=document.getElementById('audit-result');
+  r.classList.add('show');
+  document.getElementById('audit-score').textContent=pct+'%';
+  let label,desc;
+  if(pct>=80){label='10X cognitive baseline';desc='Your mind is operating at a high level. The protocol for you is about refinement, maintenance, and pushing the edges of your already strong foundation. Focus on Pillars V and VI — accelerated learning and identity engineering will give you the most leverage from here.'}
+  else if(pct>=55){label='Developing cognitive capacity';desc='You have a solid foundation with clear areas for growth. The biggest leverage for you lies in Pillars III and IV — focus training and emotional mastery. Consistent daily practice over the next 60 days will produce a significant and measurable shift in your baseline cognitive performance.'}
+  else if(pct>=35){label='Significant growth potential';desc='Your cognitive system has substantial untapped capacity. This is not a weakness — it is an opportunity. Begin with Pillar I and II: understand your mental architecture, then begin belief reconstruction work. The foundation is what everything else is built on. Do not skip it.'}
+  else{label='Foundation-building phase';desc='Your mind is ready for a significant overhaul — and that is genuinely exciting. Start with the Daily Mind Rituals in Pillar VII, implemented consistently for 14 days, before working through the other pillars. Daily practice is the entry point. Everything else builds from that consistency.'}
+  document.getElementById('audit-label').textContent=label;
+  document.getElementById('audit-desc').textContent=desc;
+}
+
+// ── RITUAL TRACKER ──
+function toggleRitual(step){
+  step.classList.toggle('done');
+  updateRitualScore();
+}
+function updateRitualScore(){
+  const all=document.querySelectorAll('.ritual-step');
+  const done=document.querySelectorAll('.ritual-step.done').length;
+  const el=document.getElementById('ritual-score');
+  if(done===0){el.textContent='';return;}
+  if(done===all.length){el.textContent='All rituals complete — your mind is being built intentionally today.';}
+  else{el.textContent=done+' of '+all.length+' rituals complete today.';}
+}
+
+// ── SHARE ──
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).catch(()=>{});
+  event.target.textContent='Link copied';
+  setTimeout(()=>{event.target.textContent='Share this protocol'},2000);
+}
+</script>
+</body>
+</html>
